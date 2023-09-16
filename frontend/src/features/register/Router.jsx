@@ -1,12 +1,12 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import  Rigister from './presenter/Index'
+import  Register from './presenter/Index'
 
 
 const Router = () => {
   return (
     <Routes>
-      <Route path='/' element={<Rigister />} />
+      <Route path='/' element={<Register />} />
     </Routes>
   )
 }

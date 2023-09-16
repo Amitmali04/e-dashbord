@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, Navigate, useNavigate } from "react-router-dom";
 
 
 
@@ -15,7 +15,7 @@ export function MainContent({ children }) {
 
 // Main Header
 
-export function CustomNavbarHeader({pageName}) {
+export function CustomNavbarHeader({ pageName }) {
     return (
         <nav className="mb-3 -mx-2 shadow-navbar md:-mx-4 bg-main-bg dark:bg-gray-800 dark:border-gray-700">
             <div className="px-3 py-2 lg:px-5 lg:pl-3">
@@ -61,14 +61,14 @@ export function CustomNavbarHeader({pageName}) {
                         </button>
 
                         <a href="" className="flex items-center ml-2 md:mr-24">
-                        {/* <img src="https://flowbite.com/docs/images/logo.svg" className="h-8 mr-3" alt="FlowBite Logo" /> */}
+                            {/* <img src="https://flowbite.com/docs/images/logo.svg" className="h-8 mr-3" alt="FlowBite Logo" /> */}
 
-                        <span className="self-center text-[28px] font-semibold whitespace-nowrap text-primary-text">{pageName}</span>
-                    </a>
+                            <span className="self-center text-[28px] font-semibold whitespace-nowrap text-primary-text">{pageName}</span>
+                        </a>
 
                     </div>
 
-                    <div className="hidden w-full mx-4 grow md:block md:w-auto" id="navbar-default">
+                    <div className="hidden w-full mx-4 grow md:block sm:flex md:w-auto" id="navbar-default">
                         {/* <NavbarResponsiveFeatures searchFunction={props.searchFunction} /> */}
                         <NavbarResponsiveFeatures />
                     </div>
@@ -88,6 +88,11 @@ export function NavbarResponsiveFeatures() {
             setShowHideClass(false)
         };
     }, [])
+
+    const handleLogout = () => {
+        localStorage.removeItem("user");
+        navigate("/")
+    }
 
     return (
         <ul className="flex flex-wrap justify-between p-4 mt-4 font-medium border rounded-lg md:justify-normal md:items-center md:p-0 md:flex-row-reverse md:space-x-8 md:mt-0 md:border-0 ">
@@ -138,16 +143,14 @@ export function NavbarResponsiveFeatures() {
 
                     </ul>
                     <div className="py-1">
-                        <a href="#"
-                            onClick={() => {
-                                // authLogOut()
-                            }}
+                        <NavLink to="/"
+                            onClick={handleLogout}
                             className="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="mr-2" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z" />
-                                <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z" />
+                                <path fillRule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z" />
+                                <path fillRule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z" />
                             </svg>
-                            Log out</a>
+                            Log out</NavLink>
                     </div>
                 </div>
             </li>
@@ -164,7 +167,7 @@ export function NavbarResponsiveFeatures() {
                     <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                     <div className="relative">
                         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                            <svg aria-hidden="true" className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            <svg aria-hidden="true" className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                         </div>
                         <input
                             type="search"

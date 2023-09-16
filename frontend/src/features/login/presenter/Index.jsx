@@ -2,13 +2,38 @@ import React, { useState } from 'react'
 import { InputField } from '../../../component/InputField'
 import { Button } from '../../../component/Button'
 import OfficeImage from '../../../assets/Office work _Outline.svg'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 export default function Login() {
+  const navigate = useNavigate()
   const [values, setValues] = useState({
     email: "",
     password:""
   })
+
+  const handlLogin = async () =>{
+    const {email, password} = values;
+    console.log({email, password})
+
+    let result = await fetch('http://localhost:5000/login', {
+      method: 'post',
+      body: JSON.stringify({email, password }),
+      headers: {
+        'Content-Type': "application/json"
+      },
+    })
+
+    result = await result.json();
+
+    if(result.name){
+      localStorage.setItem("user", JSON.stringify(result))
+
+      navigate('/dashboard')
+
+    }else{
+      alert("Please fill correct data")
+    }
+  }
   return (
     <section className='flex h-screen bg-blue-500'>
       <div className="grid md:h-[85%] md:w-[85%] self-center max-w-screen-xl px-4 py-4 mx-auto bg-white rounded-lg md:rounded-3xl xl:gap-0 lg:py-10 lg:grid-cols-12">
@@ -37,13 +62,19 @@ export default function Login() {
                 {/* {errorMessage != '' ? errorMessage : ''} */}
               </div>
               <div className="flex items-center justify-between mt-4">
-                <Button >Login</Button>
+                <Button onClick={handlLogin}>Login</Button>
                 <a className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
                   Forgot Password?
                 </a>
               </div>
               
-              <p className='mt-4 '>Create new account ? <NavLink to="/register">Sign Up</NavLink>.</p>
+              <p className='mt-4 '>Create new account ? 
+              
+              <button type='button' className='bg-white hover:bg-gray-100 text-gray-800 font-semibold p-1 border border-gray-400 rounded shadow'>
+           
+              <NavLink to="/register">Sign Up</NavLink>
+              </button>
+              </p>
               
           
           </div>

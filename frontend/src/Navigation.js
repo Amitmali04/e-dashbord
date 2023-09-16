@@ -1,5 +1,5 @@
 export const navigation = [
-    { name: 'Dashboard', path: '/dashboard', icon: '' },
+    { name: 'Dashboard', path: '/dashboard/', icon: '' },
     {
       name: 'Products',
       icon: '',

@@ -39,8 +39,8 @@ export const SideNavbar = ({ navigation }) => {
     <div className='h-full px-3 pb-4 overflow-y-auto bg-main-bg dark:bg-gray-800'>
       <p className='text-sm ml-3 text-[#919191]'>Menu</p>
       <ul className="space-y-2 font-medium">
-        {localNavigations.map((ele) => (
-          <>
+        {localNavigations.map((ele, index) => (
+          <div key={index}>
             {ele.children?.length ?
               <CustomSidebarbuttonMultiLevel
                 currentDept={currentDept}
@@ -54,7 +54,7 @@ export const SideNavbar = ({ navigation }) => {
                 changeCurrentDept={(value) => setCurrentDept(value)}
               />
             }
-          </>
+          </div>
 
         ))}
         <div className='h-[250px]'>
@@ -69,7 +69,8 @@ export const SideNavbar = ({ navigation }) => {
 
   return (
     <aside id="logo-sidebar" className='fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full drop-shadow-sidebar bg-main-bg sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700' aria-label='Sidebar'>
-      {sidebarToggle}{companyIcon}
+      {sidebarToggle}
+      {companyIcon}
       {scrollableMenuArea}
 
     </aside>
@@ -118,14 +119,14 @@ function CustomSidebarbuttonMultiLevel({ currentDept, navigation, changeCurrentD
       }} className={currentDept == navigation.name ? classStyleSelected : classStyleNonselect} aria-controls={navigation.name} data-collapse-toggle={navigation.name}>
         <span>{navigation.icon}</span>
         <span className="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>{navigation.name}</span>
-        <svg sidebar-toggle-item className={`w-6 h-6`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
+        <svg sidebar-toggle-item="false" className={`w-6 h-6`} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
       </button>
       {
         navigation.children?.length && currentDept == navigation.name ?
           <ul className='py-2 space-x-2 mt-[-2] bg-[f8f8f8]' id={navigation.name}>
             {
               navigation.children.map((ele) => (
-                <li className="flex items-center w-full p-2  transition duration-75 pl-11 group rounded-sm text-[#4B4B4B]  hover:bg-[#EEEEEE] hover:text-[#414141]">
+                <li className="flex items-center w-full p-2  transition duration-75 pl-11 group rounded-sm text-[#4B4B4B]  hover:bg-[#EEEEEE] hover:text-[#414141]" key={ele.id}>
                   <NavLink to={ele.path ?? " "} >
                     {ele.name}
                   </NavLink>
